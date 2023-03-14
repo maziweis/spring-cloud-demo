@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>micro-service-cloud-provider-dept-8003</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>micro-service-cloud-provider-dept-8001</name>
+    <name>micro-service-cloud-provider-dept-8003</name>
     <description>micro-service-cloud-provider-dept-8003</description>
     <properties>
         <java.version>1.8</java.version>
