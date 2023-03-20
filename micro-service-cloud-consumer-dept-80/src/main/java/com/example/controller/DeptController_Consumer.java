@@ -17,12 +17,14 @@ public class DeptController_Consumer {
     private static final String REST_URL_PROVIDER_PREFIX = "http://MICROSERVICECLOUDPROVIDERDEPT"; // 使用注册到 Spring Cloud Eureka 服务注册中心中的服务，即 application.name
     @Autowired
     private RestTemplate restTemplate; //RestTemplate 是一种简单便捷的访问 restful 服务模板类，是 Spring 提供的用于访问 Rest 服务的客户端模板工具集，提供了多种便捷访问远程 HTTP 服务的方法
+
     //获取指定部门信息
     @RequestMapping(value = "/consumer/dept/get/{id}")
     @GetMapping
     public Dept get(@PathVariable("id") Integer id) {
-        return restTemplate.getForObject(REST_URL_PROVIDER_PREFIX + "/dept/get/" + id, Dept.class);
+        return restTemplate.getForObject(REST_URL_PROVIDER_PREFIX + "/dept/get/" + id + "?uname=12", Dept.class);
     }
+
     //获取部门列表
     @RequestMapping(value = "/consumer/dept/list")
     @GetMapping

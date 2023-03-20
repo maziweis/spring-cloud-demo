@@ -1,5 +1,5 @@
 server:
-  port: 8012
+  port: 8011
 
 eureka:
   client:
@@ -7,3 +7,29 @@ eureka:
     service-url:
       defaultZone: http://localhost:7001/eureka/
     fetch-registry: true #服务消费者客户端需要检索服务
+######################### Ribbon 客户端超时控制 ###################################
+ribbon: #由于OpenFeign集成了Ribbon，其服务调用以及负载均衡在底层都是靠Ribbon实现的，因此OpenFeign的超时控制也是通过Ribbon来实现的
+  ReadTimeout: 6000 #建立连接所用的时间，适用于网络正常的情况下，两端连接所用的时间
+  ConnectionTimeout: 6000 #建立连接后，服务器读取到可用资源的时间
+######################配置请求超时时间##########################
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 7000
+    ####################配置具体方法超时时间 为 3 秒########################
+    DeptHystrixService#deptInfo_Timeout(Integer):
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+logging:
+  level:
+    com.example.service.DeptFeignService: debug  #是开启@FeignClient注解的接口（即服务绑定接口）的完整类名。也可以只配置部分路径，表示监控该路径下的所有服务绑定接口，debug表示监听该接口的日志级别
+    #以上配置的含义就是，OpenFeign 以 debug 级别监控 com.example.service.DeptFeignService 接口。
+feign:
+  hystrix:
+    enabled: true #开启客户端hystrix
+

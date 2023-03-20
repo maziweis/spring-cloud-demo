@@ -29,4 +29,14 @@ public class DeptController {
     public List<Dept> list() {
         return deptService.selectAll();
     }
+    @RequestMapping(value = "dept/feign/timeout")
+    public String deptFeignTimeout(){
+        try {
+            Thread.sleep(5000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return serverPort;
+    }
+
 }
